@@ -1,0 +1,19 @@
+{
+  "contacts": [
+    {
+      "name": "Nastya",
+      "number": "0995533424",
+      "id": 1
+    },
+    {
+      "name": "Denis Panevin",
+      "number": "095343",
+      "id": 2
+    },
+    {
+      "name": "Denis Panevinsd",
+      "number": "095343",
+      "id": 3
+    }
+  ]
+}
