@@ -4,15 +4,14 @@ import { FcApproval } from 'react-icons/fc';
 import styles from './Nav.module.css';
 import { useLogoutUserMutation } from 'utils/pbApi';
 import { unsetUserData } from 'redux/Auth/authSlice';
+import authOperations from 'redux/Auth/authOperation';
 
 export default function Welcoming() {
   const user = useSelector(selectCurrentUser);
-  const [logoutUser] = useLogoutUserMutation();
   const dispatch = useDispatch();
 
-  async function onLogout() {
-    await logoutUser();
-    dispatch(unsetUserData());
+  function onLogout() {
+    dispatch(authOperations.logoutUser());
   }
 
   return (

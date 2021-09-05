@@ -8,7 +8,9 @@ import {
   SubmitBtn,
 } from 'components/Authorization/Auth.styled';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import authOperations from 'redux/Auth/authOperation';
 import { useCreateUserMutation } from 'utils/pbApi';
 
 const initialUserState = {
@@ -19,7 +21,7 @@ const initialUserState = {
 
 export default function Register() {
   const [user, setUser] = useState(initialUserState);
-  const [createUser] = useCreateUserMutation();
+  const dispatch = useDispatch();
 
   function handleChange(e) {
     const value = e.target.value;
@@ -34,7 +36,7 @@ export default function Register() {
   function onSubmit(e) {
     e.preventDefault();
 
-    createUser(user);
+    dispatch(authOperations.createUser(user));
     setUser(initialUserState);
   }
 

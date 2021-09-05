@@ -6,23 +6,25 @@ import Register from 'components/Authorization/Register';
 import { Switch } from 'react-router-dom';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
-import { useDispatch } from 'react-redux';
-import { useGetUserQuery } from 'utils/pbApi';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectIsFetchingCurrentUser, selectToken } from 'redux/Auth/authSelectors';
 import { useEffect } from 'react';
-import { setUserData } from 'redux/Auth/authSlice';
+import authOperations from 'redux/Auth/authOperation';
 
 export function App() {
-  const { data, isLoading } = useGetUserQuery();
+  const token = useSelector(selectToken);
   const dispatch = useDispatch();
+  const isFetchingCurrent = useSelector(selectIsFetchingCurrentUser);
 
   useEffect(() => {
-    data && dispatch(setUserData(data));
-  }, [data, dispatch]);
+    token && dispatch(authOperations.getUser());
+  }, [dispatch, token]);
 
   return (
     <>
-      <Nav isFetchingCurrent={isLoading} />
-      {!isLoading && (
+      <Nav isFetchingCurrent={isFetchingCurrent} />
+
+      {!isFetchingCurrent && (
         <Switch>
           <PublicRoute path="/" exact>
             <HomePage />

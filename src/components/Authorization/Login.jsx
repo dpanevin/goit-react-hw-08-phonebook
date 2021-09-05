@@ -10,6 +10,7 @@ import {
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import authOperations from 'redux/Auth/authOperation';
 import { setUserData } from 'redux/Auth/authSlice';
 import { useLoginUserMutation } from 'utils/pbApi';
 
@@ -20,7 +21,6 @@ const initialUserState = {
 
 export default function Register() {
   const [user, setUser] = useState(initialUserState);
-  const [loginUser] = useLoginUserMutation();
   const dispatch = useDispatch();
 
   function handleChange(e) {
@@ -33,13 +33,11 @@ export default function Register() {
     }));
   }
 
-  async function onSubmit(e) {
+  function onSubmit(e) {
     e.preventDefault();
 
-    const resp = await loginUser(user);
-    const userData = resp.data;
+    dispatch(authOperations.loginUser(user));
     setUser(initialUserState);
-    await dispatch(setUserData(userData));
   }
 
   return (

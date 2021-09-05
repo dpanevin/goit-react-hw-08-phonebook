@@ -14,7 +14,7 @@ export const contactsApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['contact', 'user'],
+  tagTypes: ['contact'],
   endpoints: build => ({
     getContacts: build.query({
       query: () => 'contacts',
@@ -35,42 +35,7 @@ export const contactsApi = createApi({
       }),
       invalidatesTags: ['contact'],
     }),
-    getUser: build.query({
-      query: () => 'users/current',
-      providesTags: ['user'],
-    }),
-    createUser: build.mutation({
-      query: body => ({
-        url: 'users/signup',
-        method: 'POST',
-        body,
-      }),
-      invalidatesTags: ['user'],
-    }),
-    loginUser: build.mutation({
-      query: body => ({
-        url: 'users/login',
-        method: 'POST',
-        body,
-      }),
-      invalidatesTags: ['user'],
-    }),
-    logoutUser: build.mutation({
-      query: () => ({
-        url: 'users/logout',
-        method: 'POST',
-      }),
-      invalidatesTags: ['user'],
-    }),
   }),
 });
 
-export const {
-  useGetContactsQuery,
-  useAddContactMutation,
-  useDeleteContactMutation,
-  useCreateUserMutation,
-  useLoginUserMutation,
-  useLogoutUserMutation,
-  useGetUserQuery,
-} = contactsApi;
+export const { useGetContactsQuery, useAddContactMutation, useDeleteContactMutation } = contactsApi;

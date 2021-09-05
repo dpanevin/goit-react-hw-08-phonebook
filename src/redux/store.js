@@ -1,8 +1,8 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { contactsApi } from 'utils/pbApi';
 import authReducer from './Auth/authSlice';
-import { loadingReducer } from './Loading/loadingReducer';
+import loadingReducer from './Loading/loadingSlice';
 import {
   persistStore,
   persistReducer,
@@ -21,7 +21,7 @@ const persistConfig = {
   whitelist: ['token'],
 };
 
-const middleware = getDefaultMiddleware => [
+const middleware = [
   ...getDefaultMiddleware({
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
