@@ -2,8 +2,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentUser } from 'redux/Auth/authSelectors';
 import { FcApproval } from 'react-icons/fc';
 import styles from './Nav.module.css';
-import { useLogoutUserMutation } from 'utils/pbApi';
-import { unsetUserData } from 'redux/Auth/authSlice';
 import authOperations from 'redux/Auth/authOperation';
 
 export default function Welcoming() {

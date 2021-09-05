@@ -11,8 +11,6 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import authOperations from 'redux/Auth/authOperation';
-import { setUserData } from 'redux/Auth/authSlice';
-import { useLoginUserMutation } from 'utils/pbApi';
 
 const initialUserState = {
   email: '',

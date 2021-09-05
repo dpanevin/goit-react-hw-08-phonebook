@@ -68,10 +68,10 @@ export default function Nav({ isFetchingCurrent }) {
 
         <BarLoader
           loading={isFetching}
-          speedMultiplier="2"
+          speedMultiplier="1"
           className={styles.loader}
           css={loaderStyle}
-          color="#0070ff"
+          color="#00e0d9"
           height="4px"
         />
       </nav>

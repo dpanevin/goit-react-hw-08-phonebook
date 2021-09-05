@@ -1,4 +1,4 @@
-import { createAsyncThunk, isRejectedWithValue } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
@@ -15,10 +15,8 @@ const token = {
 const getUser = createAsyncThunk('auth/current', async (_, { getState }) => {
   try {
     const currentToken = getState().auth.token;
-    console.log(currentToken);
     token.set(currentToken);
     const { data } = await axios('users/current');
-    console.log(data);
     return data.name;
   } catch (error) {
     getUser.rejectedWithValue(error.message);

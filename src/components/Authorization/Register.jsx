@@ -11,7 +11,6 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import authOperations from 'redux/Auth/authOperation';
-import { useCreateUserMutation } from 'utils/pbApi';
 
 const initialUserState = {
   name: '',

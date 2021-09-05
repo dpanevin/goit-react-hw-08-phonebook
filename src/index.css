@@ -28,14 +28,6 @@ p {
   box-sizing: border-box;
 }
 
-.appPage {
-  display: flex;
-}
-
-.sideBar {
-  margin-right: 15px;
-}
-
 /* colors:
 red - #fe675a rgb(254, 103, 90)
 blue - #5b85ef rgb(91, 133, 239)

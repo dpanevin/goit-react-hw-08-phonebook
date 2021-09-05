@@ -1,7 +1,11 @@
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { selectIsLogined } from 'redux/Auth/authSelectors';
 import { HeadTitle, Section, WelcomeMessage, ListTitle, ListItem, AuthInfo } from './Home.styled';
 
 export default function HomePage() {
+  const isLogined = useSelector(selectIsLogined);
+
   return (
     <Section>
       <HeadTitle>Книга контактов</HeadTitle>
@@ -21,27 +25,31 @@ export default function HomePage() {
           4. Управление состоянием приложения было реорганизовано используя Redux-Toolkit и
           Redux-хуки
         </ListItem>
-        <ListItem>5. Используя Redux-Thunk база данных переехала на локальный JSON-Server</ListItem>
+        <ListItem>5. База данных переехала на локальный JSON-Server</ListItem>
         <ListItem>
-          6. В финальной версии приложения, база данных переехала на хостинг, связь с которым легла
-          на плечи RTK Query и была реализована аторизация пользователей
+          6. У послдней версии приложения появилась база данных на хостинге, обмен контактами
+          реализирован используя RTK Query, добвлена регистрация и авторизация пользоателя используя
+          Redux-Thunk
         </ListItem>
       </ul>
 
-      <AuthInfo>
-        Если у Вас нет аккаунта,{' '}
-        <Link to="/register" style={{ color: 'white' }}>
-          Зарегистрируйтесь
-        </Link>
-        .
-      </AuthInfo>
-      <AuthInfo>
-        Если у Вас есть аккаунт,{' '}
-        <Link to="/login" style={{ color: 'white' }}>
-          Войдите
-        </Link>
-        .
-      </AuthInfo>
+      {!isLogined && (
+        <>
+          <AuthInfo>
+            Если у Вас нет аккаунта,{' '}
+            <Link to="/register" style={{ color: 'white' }}>
+              Зарегистрируйтесь.
+            </Link>
+          </AuthInfo>
+          <AuthInfo>
+            Если у Вас есть аккаунт,{' '}
+            <Link to="/login" style={{ color: 'white' }}>
+              Войдите
+            </Link>
+            .
+          </AuthInfo>
+        </>
+      )}
     </Section>
   );
 }
