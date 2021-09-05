@@ -1,12 +1,12 @@
-import { Switch } from 'react-router-dom';
+import { Redirect, Switch } from 'react-router-dom';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsFetchingCurrentUser, selectToken } from 'redux/Auth/authSelectors';
-import { lazy, useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import authOperations from 'redux/Auth/authOperation';
+import Nav from 'components/Nav/Nav';
 const HomePage = lazy(() => import('components/Home/Home' /* webpackChunkName: 'HomePage' */));
-const Nav = lazy(() => import('components/Nav/Nav' /* webpackChunkName: 'Nav' */));
 const Phonebook = lazy(() =>
   import('components/Phonebook/Phonebook' /* webpackChunkName: 'Phonebook' */),
 );
@@ -29,20 +29,23 @@ export function App() {
       <Nav isFetchingCurrent={isFetchingCurrent} />
 
       {!isFetchingCurrent && (
-        <Switch>
-          <PublicRoute path="/" exact>
-            <HomePage />
-          </PublicRoute>
-          <PrivateRoute path="/contacts">
-            <Phonebook />
-          </PrivateRoute>
-          <PublicRoute restricted redirectTo="/contacts" path="/login">
-            <Login />
-          </PublicRoute>
-          <PublicRoute restricted path="/register">
-            <Register />
-          </PublicRoute>
-        </Switch>
+        <Suspense fallback={null}>
+          <Switch>
+            <PublicRoute path="/" exact>
+              <HomePage />
+            </PublicRoute>
+            <PrivateRoute path="/contacts">
+              <Phonebook />
+            </PrivateRoute>
+            <PublicRoute restricted redirectTo="/contacts" path="/login">
+              <Login />
+            </PublicRoute>
+            <PublicRoute restricted path="/register">
+              <Register />
+            </PublicRoute>
+            <Redirect to="/" />
+          </Switch>
+        </Suspense>
       )}
     </>
   );
