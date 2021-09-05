@@ -9,21 +9,21 @@ export const Section = styled.section`
 `;
 
 export const HeadTitle = styled.h1`
-  font-size: 35px;
+  font-size: 36px;
   margin: 15px 0;
 `;
 
 export const WelcomeMessage = styled.h2`
-  font-size: 20px;
+  font-size: 22px;
   margin-bottom: 10px;
 `;
 
 export const ListTitle = styled.h3`
-  font-size: 16px;
+  font-size: 18px;
 `;
 
 export const ListItem = styled.ol`
-  font-size: 14px;
+  font-size: 16px;
   &:not(:last-child) {
     margin-bottom: 5px;
   }
